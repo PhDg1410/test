@@ -18,8 +18,8 @@ pipeline {
         stage('Pushing image') {
             steps{
                 withDockerRegistry(credentialsId:'dockerhub', url:'https://hub.docker.com/') {
-                sh 'docker build -t spring .'
-                sh 'docker push spring'
+                sh 'docker build -t phdg1410/spring .'
+                sh 'docker push phdg1410/spring'
             }
 
             }
