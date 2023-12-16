@@ -5,6 +5,7 @@ pipeline {
     tools {
         maven 'maven'
         ansible 'ansible'
+        docker 'docker'
     }
 
     stages {
@@ -12,7 +13,6 @@ pipeline {
             steps {
                 sh 'mvn --version'
                 sh 'java --version'
-                sh 'ansible --version'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
             }
         }
@@ -20,7 +20,7 @@ pipeline {
         stage('Pushing image') {
             steps{
                 withDockerRegistry(credentialsId:'dockerhub', url:'') {
-                sh 'docker build -t phdg1410/spring .'
+                sh 'docker build -t phdg1410/spring:v1 .'
                 sh 'docker push phdg1410/spring'
             }
 
