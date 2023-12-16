@@ -15,6 +15,11 @@ pipeline {
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
             }
         }
+        stage('Test Ansible'){
+            steps {
+                sh 'ansible -i host -m ping all'
+            }
+        }
 
         stage('Pushing image') {
             steps{
