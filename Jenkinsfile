@@ -11,6 +11,7 @@ pipeline {
             steps {
                 sh 'mvn --version'
                 sh 'java --version'
+                sh 'ansible --version'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
             }
         }
