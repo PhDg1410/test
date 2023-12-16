@@ -5,7 +5,6 @@ pipeline {
     tools {
         maven 'maven'
         ansible 'ansible'
-        docker 'docker'
     }
 
     stages {
