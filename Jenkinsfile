@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Test Ansible'){
             steps {
-                sh 'ansible -i host -m ping all'
+                sh 'ansible-playbook -i host playbook.yml'
             }
         }
 
