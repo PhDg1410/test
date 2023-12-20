@@ -1,9 +1,26 @@
 ---
-- name: Ping hosts
-  hosts: all
-  become: false
-  gather_facts: false
+- name: Deploy with docker compose
+  hosts: spring
+  become: true
+  become_user: centos
 
   tasks:
-    - name: Ping hosts
-      ping:
+    - name: Copy Docker compose file from source code
+      copy:
+        src: docker-compose.yml
+        dest: /home/centos/springboot/docker-compose.yml
+    - name: Ensure Docker compose is installed
+      command: docker-compose --version
+      ignore_errors: true
+    - name: Stop and remove container 
+      command: docker compose down
+      args:
+        chdir: //home/centos/springboot/
+    - name: Pull latest image
+      command: docker compose pull
+      args: 
+        chdir: //home/centos/springboot/
+    - name: Run Docker compose 
+      command: docker-compose up -d 
+      args:
+        chdir: /home/centos/springboot/
