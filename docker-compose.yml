@@ -8,16 +8,17 @@ services:
       MYSQL_DATABASE: test_db
       MYSQL_USER: phdg
       MYSQL_PASSWORD: 123456
+    restart: unless-stopped
     volumes:
       - mysql-data:/var/lib/mysql
     ports:
-      - 3307:3306
-      
+      - 3306:3306
+
   spring-app:
     image: phdg1410/spring:latest
     container_name: spring-container
     ports:
-      - 8080:8081
+      - 8081:8081
     depends_on:
       - mysql
 
@@ -25,6 +26,5 @@ volumes:
   mysql-data:
 networks:
   backend-network:
-    driver: bridged
-
+    
 #check new compose
