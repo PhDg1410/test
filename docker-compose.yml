@@ -28,5 +28,6 @@ volumes:
   mysql-data:
 networks:
   backend-network:
+    driver: local
 
 #check new compose
