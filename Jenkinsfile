@@ -15,22 +15,19 @@ pipeline {
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
             }
         }
-        stage('Test Ansible'){
+        stage('Pushing image') {
+            steps{
+                withDockerRegistry(credentialsId:'dockerhub', url:'') {
+                sh 'docker build -t phdg1410/spring:latest .'
+                sh 'docker push phdg1410/spring:latest'
+            }
+            }           
+        }
+        stage('Deploy with Ansible'){
             steps {
                 sh 'ansible-playbook -i host playbook.yml'
             }
         }
 
-        stage('Pushing image') {
-            steps{
-                withDockerRegistry(credentialsId:'dockerhub', url:'') {
-                sh 'docker build -t phdg1410/spring:v1 .'
-                sh 'docker push phdg1410/spring'
-            }
-
-            }
-            
-            
-        }
     }
 }
