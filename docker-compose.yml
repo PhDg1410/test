@@ -1,0 +1,27 @@
+version: '3'
+services:
+  mysql:
+    image: mysql
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: phdg
+      MYSQL_PASSWORD: 123456
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - 3307:3306
+    networks:
+      - backend-network
+  spring-app:
+    image: phdg1410/spring
+    container_name: spring-container
+    ports:
+      - 8080:8081
+    networks:
+      - backend-network
+    depends_on:
+      - mysql
+volumes:
+  mysql-data:
