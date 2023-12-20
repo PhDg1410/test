@@ -15,11 +15,11 @@
     - name: Stop and remove container 
       command: docker compose down
       args:
-        chdir: //home/centos/springboot/
+        chdir: /home/centos/springboot/
     - name: Pull latest image
       command: docker compose pull
       args: 
-        chdir: //home/centos/springboot/
+        chdir: /home/centos/springboot/
     - name: Run Docker compose 
       command: docker-compose up -d 
       args:
